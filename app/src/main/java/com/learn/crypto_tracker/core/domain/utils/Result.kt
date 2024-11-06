@@ -1,4 +1,4 @@
-package com.learn.crypto_tracker.util
+package com.learn.crypto_tracker.core.domain.utils
 
 typealias DomainError = Error
 
