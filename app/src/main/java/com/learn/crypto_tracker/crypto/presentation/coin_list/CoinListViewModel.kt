@@ -6,9 +6,11 @@ import com.learn.crypto_tracker.core.domain.utils.onError
 import com.learn.crypto_tracker.core.domain.utils.onSuccess
 import com.learn.crypto_tracker.crypto.domain.CoinDataSource
 import com.learn.crypto_tracker.crypto.presentation.models.toCoinUi
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -26,8 +28,11 @@ class CoinListViewModel(
             CoinListState()
         )
 
-    fun onAction(action: CoinListAction){
-        when(action){
+    private val _events = Channel<CoinListEvent>()
+    val events = _events.receiveAsFlow()
+
+    fun onAction(action: CoinListAction) {
+        when (action) {
             is CoinListAction.OnCoinClick -> {
                 TODO()
             }
@@ -50,10 +55,9 @@ class CoinListViewModel(
                 }
             }.onError { error ->
                 _state.update {
-                    it.copy(
-                        isLoading = false
-                    )
+                    it.copy(isLoading = false)
                 }
+                _events.send(CoinListEvent.Error(error))
             }
         }
     }
