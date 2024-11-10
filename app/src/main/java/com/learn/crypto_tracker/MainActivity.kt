@@ -17,7 +17,7 @@ import com.learn.crypto_tracker.core.presentation.utils.toString
 import com.learn.crypto_tracker.crypto.presentation.coin_details.CoinDetailScreen
 import com.learn.crypto_tracker.crypto.presentation.coin_list.CoinListEvent
 import com.learn.crypto_tracker.crypto.presentation.coin_list.CoinListScreen
-import com.learn.crypto_tracker.crypto.presentation.coin_list.CoinListViewModel
+import com.learn.crypto_tracker.crypto.presentation.coin_list.viewmodel.CoinListViewModel
 import com.learn.crypto_tracker.ui.theme.CryptoTrackerTheme
 import org.koin.androidx.compose.koinViewModel
 

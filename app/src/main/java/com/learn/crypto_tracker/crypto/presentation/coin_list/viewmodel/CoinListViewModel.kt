@@ -1,10 +1,13 @@
-package com.learn.crypto_tracker.crypto.presentation.coin_list
+package com.learn.crypto_tracker.crypto.presentation.coin_list.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.learn.crypto_tracker.core.domain.utils.onError
 import com.learn.crypto_tracker.core.domain.utils.onSuccess
 import com.learn.crypto_tracker.crypto.domain.CoinDataSource
+import com.learn.crypto_tracker.crypto.presentation.coin_list.CoinListAction
+import com.learn.crypto_tracker.crypto.presentation.coin_list.CoinListEvent
+import com.learn.crypto_tracker.crypto.presentation.coin_list.CoinListState
 import com.learn.crypto_tracker.crypto.presentation.models.toCoinUi
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
