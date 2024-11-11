@@ -8,6 +8,7 @@ import com.learn.crypto_tracker.crypto.domain.CoinDataSource
 import com.learn.crypto_tracker.crypto.presentation.coin_list.CoinListAction
 import com.learn.crypto_tracker.crypto.presentation.coin_list.CoinListEvent
 import com.learn.crypto_tracker.crypto.presentation.coin_list.CoinListState
+import com.learn.crypto_tracker.crypto.presentation.models.CoinUI
 import com.learn.crypto_tracker.crypto.presentation.models.toCoinUi
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,6 +18,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.time.ZonedDateTime
 
 class CoinListViewModel(
     private val coinDataSource: CoinDataSource
@@ -37,12 +39,29 @@ class CoinListViewModel(
     fun onAction(action: CoinListAction) {
         when (action) {
             is CoinListAction.OnCoinClick -> {
-                _state.update {
-                    it.copy(
-                        selectedCoin = action.coinUI
-                    )
-                }
+                selectCoin(action.coinUI)
             }
+        }
+    }
+
+    private fun selectCoin(coinUI: CoinUI) {
+        _state.update {
+            it.copy(selectedCoin = coinUI)
+        }
+
+        viewModelScope.launch {
+            coinDataSource
+                .getCoinHistory(
+                    coinId = coinUI.id,
+                    start = ZonedDateTime.now().minusDays(5),
+                    end = ZonedDateTime.now()
+                )
+                .onSuccess { history ->
+                    TODO()
+                }
+                .onError { error ->
+                    _events.send(CoinListEvent.Error(error))
+                }
         }
     }
 
