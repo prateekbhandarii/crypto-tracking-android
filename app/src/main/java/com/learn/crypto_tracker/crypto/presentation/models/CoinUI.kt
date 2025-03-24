@@ -3,6 +3,7 @@ package com.learn.crypto_tracker.crypto.presentation.models
 import androidx.annotation.DrawableRes
 import com.learn.crypto_tracker.crypto.domain.Coin
 import com.learn.crypto_tracker.core.presentation.utils.getDrawableIdForCoin
+import com.learn.crypto_tracker.crypto.presentation.coin_details.chart.data.DataPoint
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -14,7 +15,8 @@ data class CoinUI(
     val marketCapUsd: DisplayableNumber,
     val priceUsd: DisplayableNumber,
     val changePercentLast24Hr: DisplayableNumber,
-    @DrawableRes val iconRes: Int
+    @DrawableRes val iconRes: Int,
+    val coinPriceHistory: List<DataPoint> = emptyList()
 )
 
 data class DisplayableNumber(
