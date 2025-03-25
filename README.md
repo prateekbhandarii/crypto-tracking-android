@@ -4,5 +4,4 @@ A simple practice of Jetpack compose using Animations and structured architectur
 
 ## Preview
 
-https://github.com/user-attachments/assets/47aefa43-7508-4ff0-8676-1647db13b4c9
-
+![Recording 2025-03-25 171432](https://github.com/user-attachments/assets/d0958f75-3c08-42d5-af81-02033b31c337)
